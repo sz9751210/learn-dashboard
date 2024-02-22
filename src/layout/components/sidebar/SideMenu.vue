@@ -51,11 +51,6 @@ function generateOptions(routes, basePath) {
 function handleMenuSelect(key, item) {
   router.push(item.path)
 
-  // 通过path重定向
-  // router.push({
-  //   path: '/redirect',
-  //   query: { redirect: item.path },
-  // })
 }
 </script>
 
@@ -121,40 +116,4 @@ function handleMenuSelect(key, item) {
     }
   }
 }
-// .side-menu {
-//   // padding-left: 15px;
-//   .n-menu-item-content-header {
-//     color: #fff !important;
-//     font-weight: bold;
-//     font-size: 14px;
-//   }
-
-//   .n-submenu {
-//     .n-menu-item-content-header {
-//       color: #fff !important;
-//       font-weight: bold;
-//       font-size: 14px;
-//     }
-//   }
-//   .n-submenu-children {
-//     .n-menu-item-content-header {
-//       color: #fff !important;
-//       font-weight: normal;
-//       font-size: 12px;
-//     }
-//   }
-//   .n-menu-item {
-//     border-top-left-radius: 5px;
-//     border-bottom-left-radius: 5px;
-//     &:hover,
-//     &.n-menu-item--selected::before {
-//       background-color: #16243a;
-//       right: 0;
-//       left: 0;
-// border-right: 3px solid $primaryColor;
-// background-color: unset !important;
-// background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba($primaryColor, 0.3) 100%);
-//     }
-//   }
-// }
 </style>

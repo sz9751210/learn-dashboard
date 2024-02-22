@@ -3,5 +3,5 @@ import { createPermissionGuard } from './permissionGuard'
 
 export function setupRouterGuard(router) {
   createPageLoadingGuard(router)
-  createPermissionGuard(router)
+  // createPermissionGuard(router)
 }

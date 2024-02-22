@@ -1,5 +1,6 @@
 import Layout from '@/layout/index.vue'
 import Dashboard from '@/views/dashboard/index.vue'
+import userManagerRoutes from './modules/user'
 
 // 基础路由配置数组，包含了应用中的一些基本路由
 export const basicRoutes = [
@@ -98,6 +99,7 @@ export const basicRoutes = [
       },
     ],
   },
+  ...userManagerRoutes,
 ]
 
 // 当访问的路由不存在时，重定向到404页面

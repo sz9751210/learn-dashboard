@@ -2,7 +2,7 @@
 import Layout from '@/layout/index.vue'
 
 // 導出路由配置的數組
-export default [
+export const userManagerRoutes = [
   {
     name: 'USER_MANAGER', // 路由名稱，用於標識路由
     path: '/user', // 路由路徑
@@ -10,7 +10,7 @@ export default [
     redirect: '/user/management', // 訪問/user時自動重定向到/user/management
     meta: {
       title: '用户中心', // 路由的元信息，可以包含任意屬性，在這裡定義了頁面標題和角色
-      role: ['admin'], // 訪問該路由所需的用戶角色
+      role: [], // 訪問該路由所需的用戶角色
     },
     children: [ // 子路由配置
       {
@@ -19,7 +19,7 @@ export default [
         component: () => import('@/views/user/index.vue'), // 懶加載用戶管理頁面組件
         meta: {
           title: '用户管理', // 頁面標題
-          role: ['admin'], // 訪問該頁面所需的用戶角色
+          role: [], // 訪問該頁面所需的用戶角色
         },
       },
       {
@@ -28,9 +28,11 @@ export default [
         component: () => import('@/views/user/UserPermission.vue'), // 懶加載權限管理頁面組件
         meta: {
           title: '权限管理', // 頁面標題
-          role: ['admin'], // 訪問該頁面所需的用戶角色
+          role: [], // 訪問該頁面所需的用戶角色
         },
       },
     ],
   },
 ]
+
+export default userManagerRoutes

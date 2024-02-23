@@ -6,7 +6,7 @@ export const devopsRoutes = [
     name: 'DEVOPS',
     path: '/devops',
     component: Layout,
-    redirect: '/devops/unocss',
+    redirect: '/devops/roadmap',
     meta: {
       title: 'DevOps',
     },

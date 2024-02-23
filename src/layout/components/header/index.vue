@@ -1,12 +1,10 @@
 <script setup>
 import BreadCrumb from './BreadCrumb.vue'
-import HeaderAction from './HeaderAction.vue'
 </script>
 
 <template>
   <header class="header">
     <bread-crumb />
-    <header-action />
   </header>
 </template>
 

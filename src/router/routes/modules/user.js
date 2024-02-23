@@ -12,7 +12,8 @@ export const userManagerRoutes = [
       title: '用户中心', // 路由的元信息，可以包含任意屬性，在這裡定義了頁面標題和角色
       role: [], // 訪問該路由所需的用戶角色
     },
-    children: [ // 子路由配置
+    children: [
+      // 子路由配置
       {
         name: 'USER', // 子路由名稱
         path: 'management', // 子路由路徑，注意這裡是相對於父路由的相對路徑

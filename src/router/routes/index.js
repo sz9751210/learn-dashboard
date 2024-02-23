@@ -1,6 +1,7 @@
 import Layout from '@/layout/index.vue'
 import Dashboard from '@/views/dashboard/index.vue'
 import userManagerRoutes from './modules/user'
+import devopsRoutes from './modules/devops'
 
 // 基础路由配置数组，包含了应用中的一些基本路由
 export const basicRoutes = [
@@ -63,50 +64,7 @@ export const basicRoutes = [
     ],
   },
   // 测试页面路由，包含了多个子路由
-  {
-    name: 'DEVOPS',
-    path: '/devops',
-    component: Layout,
-    redirect: '/devops/unocss',
-    meta: {
-      title: 'DevOps',
-    },
-    children: [
-      // 测试页面下的具体测试项
-      {
-        name: 'ROADMAP',
-        path: 'roadmap',
-        component: () => import('@/views/test-page/RoadMap.vue'),
-        meta: {
-          title: 'RoadMap',
-        },
-      },
-      {
-        name: 'AWESOMEDEVOPS',
-        path: 'awesomedevops',
-        component: () => import('@/views/test-page/AwesomeDevops.vue'),
-        meta: {
-          title: 'Awesome Devops',
-        },
-      },
-      {
-        name: 'Blog',
-        path: 'blog',
-        component: () => import('@/views/test-page/DevopsBlog.vue'),
-        meta: {
-          title: 'DevOps Blog',
-        },
-      },
-      {
-        name: 'Book List',
-        path: 'book-list',
-        component: () => import('@/views/test-page/BookList.vue'),
-        meta: {
-          title: 'Book List',
-        },
-      },
-    ],
-  },
+  ...devopsRoutes,
   ...userManagerRoutes,
 ]
 

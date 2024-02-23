@@ -15,7 +15,7 @@ export const devopsRoutes = [
       {
         name: 'ROADMAP',
         path: 'roadmap',
-        component: () => import('@/views/test-page/RoadMap.vue'),
+        component: () => import('@/views/devops/RoadMap.vue'),
         meta: {
           title: 'RoadMap',
         },
@@ -23,7 +23,7 @@ export const devopsRoutes = [
       {
         name: 'AWESOMEDEVOPS',
         path: 'awesomedevops',
-        component: () => import('@/views/test-page/AwesomeDevops.vue'),
+        component: () => import('@/views/devops/AwesomeDevops.vue'),
         meta: {
           title: 'Awesome Devops',
         },
@@ -31,7 +31,7 @@ export const devopsRoutes = [
       {
         name: 'Blog',
         path: 'blog',
-        component: () => import('@/views/test-page/DevopsBlog.vue'),
+        component: () => import('@/views/devops/DevopsBlog.vue'),
         meta: {
           title: 'DevOps Blog',
         },
@@ -39,7 +39,7 @@ export const devopsRoutes = [
       {
         name: 'Book List',
         path: 'book-list',
-        component: () => import('@/views/test-page/BookList.vue'),
+        component: () => import('@/views/devops/BookList.vue'),
         meta: {
           title: 'Book List',
         },

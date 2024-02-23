@@ -1,22 +1,23 @@
 import Layout from '@/layout/index.vue'
 import Dashboard from '@/views/dashboard/index.vue'
 import devopsRoutes from './modules/devops'
+import NotFound from '@/views/error-page/404.vue'
 
 // 基础路由配置数组，包含了应用中的一些基本路由
 export const basicRoutes = [
   // 404错误页面路由
   {
     name: '404', // 路由名称
-    path: '/404', // 访问路径
-    component: () => import('@/views/error-page/404.vue'), // 懒加载404页面组件
-    isHidden: true, // 自定义属性，用于判断该路由是否在侧边栏中隐藏
-  },
-  // 401错误页面路由
-  {
-    name: '401',
-    path: '/401',
-    component: () => import('@/views/error-page/401.vue'),
-    isHidden: true,
+    path: '/:pathMatch(.*)*', // 访问路径
+    component: Layout,
+    isHidden: true, // 自定义属性，用于判断该路由是否在侧边栏中
+    children: [
+      {
+        name: 'NotFound', // 子路由名称
+        path: '', // 子路由路径
+        component: () => import('@/views/error-page/404.vue'), // 懒加载404页面组件
+      },
+    ],
   },
   // 重定向功能路由
   {

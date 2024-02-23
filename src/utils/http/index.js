@@ -25,8 +25,3 @@ function createAxios(option = {}) {
 
 // 创建一个默认的axios实例，没有特别的配置
 export const defAxios = createAxios()
-
-// 创建一个专门用于模拟请求的axios实例，其baseURL指向测试API
-export const mockAxios = createAxios({
-  baseURL: window.__APP__GLOB__CONF__?.VITE_APP_GLOB_BASE_API_TEST || import.meta.env.VITE_APP_GLOB_BASE_API_TEST,
-})

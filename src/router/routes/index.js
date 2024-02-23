@@ -1,6 +1,5 @@
 import Layout from '@/layout/index.vue'
 import Dashboard from '@/views/dashboard/index.vue'
-import userManagerRoutes from './modules/user'
 import devopsRoutes from './modules/devops'
 
 // 基础路由配置数组，包含了应用中的一些基本路由
@@ -33,16 +32,6 @@ export const basicRoutes = [
       },
     ],
   },
-  // 登录页面路由
-  {
-    name: 'LOGIN',
-    path: '/login',
-    component: () => import('@/views/login/index.vue'),
-    isHidden: true,
-    meta: {
-      title: '登录页', // 页面标题，用于显示在浏览器标签或导航栏
-    },
-  },
   // 首页路由
   {
     name: 'HOME',
@@ -63,9 +52,8 @@ export const basicRoutes = [
       },
     ],
   },
-  // 测试页面路由，包含了多个子路由
+  // devops路由，包含了多个子路由
   ...devopsRoutes,
-  ...userManagerRoutes,
 ]
 
 // 当访问的路由不存在时，重定向到404页面

@@ -64,37 +64,45 @@ export const basicRoutes = [
   },
   // 测试页面路由，包含了多个子路由
   {
-    name: 'TEST',
-    path: '/test',
+    name: 'DEVOPS',
+    path: '/devops',
     component: Layout,
-    redirect: '/test/unocss',
+    redirect: '/devops/unocss',
     meta: {
-      title: '测试',
+      title: 'DevOps',
     },
     children: [
       // 测试页面下的具体测试项
       {
-        name: 'UNOCSS',
-        path: 'unocss',
-        component: () => import('@/views/test-page/TestUnocss.vue'),
+        name: 'ROADMAP',
+        path: 'roadmap',
+        component: () => import('@/views/test-page/RoadMap.vue'),
         meta: {
-          title: '测试unocss',
+          title: 'RoadMap',
         },
       },
       {
-        name: 'MESSAGE',
-        path: 'message',
-        component: () => import('@/views/test-page/TestMessage.vue'),
+        name: 'AWESOMEDEVOPS',
+        path: 'awesomedevops',
+        component: () => import('@/views/test-page/AwesomeDevops.vue'),
         meta: {
-          title: '测试Message',
+          title: 'Awesome Devops',
         },
       },
       {
-        name: 'DIALOG',
-        path: 'dialog',
-        component: () => import('@/views/test-page/TestDialog.vue'),
+        name: 'Blog',
+        path: 'blog',
+        component: () => import('@/views/test-page/DevopsBlog.vue'),
         meta: {
-          title: '测试Dialog',
+          title: 'DevOps Blog',
+        },
+      },
+      {
+        name: 'Book List',
+        path: 'book-list',
+        component: () => import('@/views/test-page/BookList.vue'),
+        meta: {
+          title: 'Book List',
         },
       },
     ],

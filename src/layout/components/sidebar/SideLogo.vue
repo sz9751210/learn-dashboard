@@ -1,13 +1,13 @@
 <script setup>
 import { NGradientText, NIcon } from 'naive-ui'
-import { LastfmSquare } from '@vicons/fa'
+import { Chalkboard } from '@vicons/fa'
 const title = import.meta.env.VITE_APP_TITLE
 </script>
 
 <template>
   <div class="logo">
-    <n-icon size="36" color="#316c72">
-      <lastfm-square />
+    <n-icon size="35" color="#316c72">
+      <chalkboard />
     </n-icon>
     <router-link to="/">
       <n-gradient-text type="primary">{{ title }}</n-gradient-text>

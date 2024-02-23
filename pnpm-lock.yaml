@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@vicons/fa':
-    specifier: ^0.11.0
-    version: 0.11.0
+    specifier: 0.12.0
+    version: 0.12.0
   axios:
     specifier: ^0.21.4
     version: 0.21.4
@@ -648,8 +648,8 @@ packages:
       '@unocss/scope': 0.16.4
     dev: true
 
-  /@vicons/fa@0.11.0:
-    resolution: {integrity: sha512-Mlv4sxlghqAPu+RM+6w0/GIcsQFK/fx1syw1HkABS6MJRLwHOqbmImCYZQam7OMAYhZBs82YpY5cp2NFSgwkOA==}
+  /@vicons/fa@0.12.0:
+    resolution: {integrity: sha512-g2PIeJLsTHUjt6bK63LxqC0uYQB7iu+xViJOxvp1s8b9/akpXVPVWjDTTsP980/0KYyMMe4U7F/aUo7wY+MsXA==}
     dev: false
 
   /@vitejs/plugin-vue@1.10.2(vite@2.9.17):

@@ -18,31 +18,36 @@
     />
   </div>
   <div class="cards-container">
-    <n-card v-for="(card, index) in filteredCards" :key="index" class="card-item" @click="navigateTo(card.url)">
-      <template #cover>
-        <img :src="card.coverUrl" />
+    <n-popover v-for="(card, index) in filteredCards" :key="`popover-${index}`" trigger="hover" placement="top-start">
+      <template #trigger>
+        <n-card class="card-item" @click="navigateTo(card.url)">
+          <template #cover>
+            <img :src="card.coverUrl" />
+          </template>
+          <template #header>
+            <!-- 包裹标题以应用样式 -->
+            <div class="card-title">{{ card.title }}</div>
+          </template>
+          <div class="tags-container">
+            <n-tag v-for="(author, index) in card.authors" :key="`author-${index}`" type="info">
+              {{ author }}
+            </n-tag>
+          </div>
+          <div class="tags-container">
+            <n-tag v-for="(tag, index) in card.tag" :key="`tag-${index}`" type="success">
+              {{ tag }}
+            </n-tag>
+          </div>
+          <!-- {{ card.content }} -->
+        </n-card>
       </template>
-      <template #header>
-        <!-- 包裹标题以应用样式 -->
-        <div class="card-title">{{ card.title }}</div>
-      </template>
-      <div class="tags-container">
-        <n-tag v-for="(author, index) in card.authors" :key="`author-${index}`" type="info">
-          {{ author }}
-        </n-tag>
-      </div>
-      <div class="tags-container">
-        <n-tag v-for="(tag, index) in card.tag" :key="`tag-${index}`" type="success">
-          {{ tag }}
-        </n-tag>
-      </div>
-      <!-- {{ card.content }} -->
-    </n-card>
+      {{ card.content }}
+    </n-popover>
   </div>
 </template>
 
 <script setup>
-import { NCard, NSelect, NTag } from 'naive-ui'
+import { NCard, NSelect, NTag, NPopover } from 'naive-ui'
 import { ref, computed } from 'vue'
 import { books } from '@/api/books'
 
@@ -124,5 +129,9 @@ const navigateTo = (url) => {
   font-size: 12px; /* 减小字体大小 */
   margin-right: 5px;
   margin-top: 10px;
+}
+.n-popover {
+  max-width: 40px; /* 强制设置最大宽度 */
+  word-wrap: break-word; /* 允许在必要时断字 */
 }
 </style>

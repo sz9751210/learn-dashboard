@@ -48,10 +48,21 @@
 
 <script setup>
 import { NCard, NSelect, NTag, NPopover } from 'naive-ui'
-import { ref, computed } from 'vue'
-import { books } from '@/api/books'
+import { ref, computed, onMounted } from 'vue'
+import { fetchBooks } from '@/api/books'
 
-const cards = ref(books)
+const cards = ref([])
+
+const loadBooks = async () => {
+  try {
+    cards.value = await fetchBooks()
+  } catch (err) {
+    // 處理錯誤，比如顯示用戶友好的錯誤信息
+    console.error(err)
+  }
+}
+
+onMounted(loadBooks)
 
 const selectedAuthorTags = ref([])
 const selectedTags = ref([])

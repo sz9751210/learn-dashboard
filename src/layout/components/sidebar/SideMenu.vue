@@ -2,13 +2,14 @@
 import { NMenu } from 'naive-ui'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
-import { usePermissionStore } from '@/store/modules/permission'
+// 从路由配置文件中导入所有异步路由和基础路由
+import { basicRoutes } from '@/router/routes'
 
 const router = useRouter()
-const permissionStore = usePermissionStore()
 
 const { currentRoute } = router
-const routes = permissionStore.routes
+const routes = basicRoutes
+console.log('basic Routes', basicRoutes)
 
 const menuOptions = computed(() => {
   return generateOptions(routes, '')
@@ -50,7 +51,6 @@ function generateOptions(routes, basePath) {
 
 function handleMenuSelect(key, item) {
   router.push(item.path)
-
 }
 </script>
 

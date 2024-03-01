@@ -7,7 +7,7 @@ import { setupRouterGuard } from './guard'
 import { basicRoutes } from './routes'
 
 // 定义一个名为WHITE_NAME_LIST的数组，包含不需要重置的路由名称
-const WHITE_NAME_LIST = ['Login', 'ErrorPage']; // 假设值，需根据实际情况调整
+const WHITE_NAME_LIST = ['Login', 'ErrorPage'] // 假设值，需根据实际情况调整
 
 // 使用createRouter创建路由器实例
 export const router = createRouter({

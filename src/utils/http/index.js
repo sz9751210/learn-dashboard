@@ -1,7 +1,5 @@
 // 从axios库导入axios，这是一个基于Promise的HTTP客户端，用于浏览器和node.js
 import axios from 'axios'
-// 从当前目录下的interceptors.js文件导入setupInterceptor函数
-import { setupInterceptor } from './interceptors'
 
 /**
  * 创建并配置一个axios实例。
@@ -18,7 +16,7 @@ function createAxios(option = {}) {
     baseURL: option.baseURL || defBaseURL, // 设置基础URL，默认为全局配置或环境变量中的值
   })
   // 为创建的axios实例设置拦截器
-  setupInterceptor(service)
+  // setupInterceptor(service)
   // 返回配置好的axios实例
   return service
 }

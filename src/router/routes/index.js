@@ -40,7 +40,7 @@ export const basicRoutes = [
     component: Layout,
     redirect: '/dashboard', // 访问根路径时重定向到/dashboard
     meta: {
-      title: '首页',
+      title: '首頁',
     },
     children: [
       {

@@ -1,10 +1,12 @@
 <template>
-  <n-table :columns="columns" :data="data" />
+  <h1>容器列表</h1>
+  <p>以下是當前的容器狀態：</p>
+  <n-data-table :columns="columns" :data="data" />
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { NTable, NButton } from 'naive-ui'
+import { NDataTable } from 'naive-ui'
 import { fetchContainers } from '@/api/container'
 
 const columns = [
@@ -27,6 +29,9 @@ const columns = [
   {
     title: 'Port(s)',
     key: 'ports',
+    render(row) {
+      return row.ports.join(', ')
+    },
   },
 ]
 
@@ -34,14 +39,14 @@ const data = ref([])
 
 const loadData = async () => {
   try {
-    data.value = await fetchContainers()
+    const response = await fetchContainers()
+    data.value = response
   } catch (error) {
+    // 考虑添加用户友好的错误处理
     console.error('Error fetching containers:', error)
   }
 }
 
-console.log('container', data)
-// 组件挂载时获取数据
 onMounted(loadData)
 </script>
 

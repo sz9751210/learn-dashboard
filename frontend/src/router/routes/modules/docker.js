@@ -23,7 +23,7 @@ export const dockerRoutes = [
       {
         name: 'IMAGES',
         path: 'images',
-        component: () => import('@/views/docker/DockerContainer.vue'),
+        component: () => import('@/views/docker/DockerImage.vue'),
         meta: {
           title: 'Docker Images',
         },

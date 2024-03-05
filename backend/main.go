@@ -70,12 +70,29 @@ func getContainers(c *gin.Context) {
 	c.JSON(http.StatusOK, containers)
 }
 
+type DockerImage struct {
+    ID         string `json:"id"`
+    Repository string `json:"repository"`
+    Tag        string `json:"tag"`
+    Size       string `json:"size"`
+}
+
+func getImages(c *gin.Context) {
+    // 範例數據，實際應用中應該從 Docker API 或數據庫獲取
+    images := []DockerImage{
+        {ID: "1", Repository: "nginx", Tag: "latest", Size: "132MB"},
+        {ID: "2", Repository: "redis", Tag: "alpine", Size: "27MB"},
+        // 添加更多 images ...
+    }
+    c.JSON(http.StatusOK, images)
+}
+
 func main() {
 	r := gin.Default()
 
 	// 設定CORS，以允許來自特定源的請求
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3100"},                            // 允許這個源的跨域請求
+		AllowOrigins:     []string{"http://127.0.0.1:3100","http://localhost:3100"},                            // 允許這個源的跨域請求
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"}, // 允許的HTTP方法
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -83,5 +100,6 @@ func main() {
 	}))
 	r.GET("/api/getBooks", getBooks)
 	r.GET("/api/getContainers", getContainers)
+	r.GET("/api/getImages", getImages)
 	r.Run(":8080")
 }

@@ -2,6 +2,8 @@ import Layout from '@/layout/index.vue'
 import Dashboard from '@/views/dashboard/index.vue'
 import devopsRoutes from './modules/devops'
 import NotFound from '@/views/error-page/404.vue'
+import k8sRoutes from './modules/k8s'
+import dockerRoutes from './modules/docker'
 
 // 基础路由配置数组，包含了应用中的一些基本路由
 export const basicRoutes = [
@@ -55,6 +57,8 @@ export const basicRoutes = [
   },
   // devops路由，包含了多个子路由
   ...devopsRoutes,
+  ...k8sRoutes,
+  ...dockerRoutes,
 ]
 
 // 当访问的路由不存在时，重定向到404页面

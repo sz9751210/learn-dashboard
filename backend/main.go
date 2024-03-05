@@ -16,6 +16,15 @@ type Book struct {
 	Url      string   `json:"url"`
 }
 
+type ContainerInfo struct {
+	Name   string  `json:"name"`
+	Image  string  `json:"image"`
+	Status string  `json:"status"`
+	CPU    float64 `json:"cpu"`
+	Ports  []int   `json:"ports"`
+	Memory float64 `json:"memory"`
+}
+
 func getBooks(c *gin.Context) {
 
 	books := []Book{
@@ -39,6 +48,28 @@ func getBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, books)
 }
 
+func getContainers(c *gin.Context) {
+	containers := []ContainerInfo{
+		{
+			Name:   "kubemanage",
+			Image:  "kubernetes:latest",
+			Status: "Exited",
+			CPU:    0, // 假设这是 CPU 使用百分比
+			Ports:  []int{8080},
+			Memory: 0, // 假设这是内存使用百分比
+		},
+		{
+			Name:   "mysql-1",
+			Image:  "mysql:8.0",
+			Status: "Exited",
+			CPU:    1.4,
+			Ports:  []int{3306},
+			Memory: 4.1,
+		},
+	}
+	c.JSON(http.StatusOK, containers)
+}
+
 func main() {
 	r := gin.Default()
 
@@ -51,5 +82,6 @@ func main() {
 		AllowCredentials: true, // 允許前端請求攜帶認證信息（cookies）
 	}))
 	r.GET("/api/getBooks", getBooks)
+	r.GET("/api/getContainers", getContainers)
 	r.Run(":8080")
 }

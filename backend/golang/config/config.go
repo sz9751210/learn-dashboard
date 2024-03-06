@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/spf13/viper"
 	"log"
+
+	"github.com/spf13/viper"
 )
 
 var Config Configuration
@@ -33,8 +34,8 @@ func ShouldMock(apiName string) bool {
 	apiMockPath := "api." + apiName + ".mock"
 	// apiMock := fmt.Sprintf("api.%s.mock", apiName)
 	if viper.IsSet(apiMockPath) {
-		// return viper.GetBool(apiMock)
-		return Config.API[apiName].Mock
+		return viper.GetBool(apiMockPath)
+		// return Config.API[apiName].Mock
 	} else {
 		return globalMock
 	}

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"go-dashboard/config"
 	"go-dashboard/models"
+	"go-dashboard/utils/docker"
 	"os"
 	"path/filepath"
 )
@@ -34,7 +35,7 @@ func LoadImages() ([]models.DockerImage, error) {
 		err := loadDataFromFile(filepath.Join("mockData", "images.json"), &images)
 		return images, err
 	} else {
-		return nil, nil
+		return docker.LoadImagesFromDockerCLI()
 	}
 }
 

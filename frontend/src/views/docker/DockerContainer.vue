@@ -29,9 +29,9 @@ const columns = [
   {
     title: 'Port(s)',
     key: 'ports',
-    render(row) {
-      return row.ports.join(', ')
-    },
+    // render(row) {
+    //   return row.ports.join(', ')
+    // },
   },
 ]
 

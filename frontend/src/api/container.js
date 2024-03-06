@@ -2,7 +2,7 @@ import { defAxios } from '@/utils/http'
 
 export const fetchContainers = async () => {
   try {
-    const resp = await defAxios.get('/api/getContainers')
+    const resp = await defAxios.get('/api/containers')
     return resp.data
   } catch (err) {
     console.log('讀取 containers failed', err)
@@ -12,7 +12,7 @@ export const fetchContainers = async () => {
 
 export const fetchImages = async () => {
   try {
-    const resp = await defAxios.get('/api/getImages')
+    const resp = await defAxios.get('/api/images')
     return resp.data
   } catch (err) {
     console.log('讀取 images failed', err)

@@ -14,6 +14,7 @@ func main() {
 
 	router.GET("/api/books", handlers.GetBooks)
 	router.GET("/api/containers", handlers.GetContainers)
+	router.GET("/api/blogs", handlers.GetBlogs)
 
 	if err := router.Run(":8080"); err != nil {
 		log.Fatalf("Failed to run server: %v", err)

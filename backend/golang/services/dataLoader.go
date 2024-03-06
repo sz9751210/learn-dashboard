@@ -19,6 +19,12 @@ func LoadContainers() ([]models.ContainerInfo, error) {
 	return containers, err
 }
 
+func LoadBlogs() ([]models.Blog, error) {
+	var blogs []models.Blog
+	err := loadDataFromFile(filepath.Join("mockData", "blogs.json"), &blogs)
+	return blogs, err
+}
+
 func loadDataFromFile(filePath string, data interface{}) error {
 	fileBytes, err := os.ReadFile(filePath)
 	if err != nil {

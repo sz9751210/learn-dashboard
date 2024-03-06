@@ -1,18 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"log"
+	"go-dashboard/config"
 	"go-dashboard/handlers"
+	"log"
 )
 
 func main() {
+
+	config.LoadConfig()
+
 	router := gin.Default()
 
-
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://127.0.0.1:3100","http://localhost:3100"},                            // 允許這個源的跨域請求
+		AllowOrigins:     []string{"http://127.0.0.1:3100", "http://localhost:3100"},   // 允許這個源的跨域請求
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"}, // 允許的HTTP方法
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},

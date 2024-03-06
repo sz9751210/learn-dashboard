@@ -1,0 +1,10 @@
+mock: true
+api:
+  getBooks:
+    mock: true
+  getBlogs:
+    mock: true
+  getImages:
+    mock: true
+  getContainers:
+    mock: true

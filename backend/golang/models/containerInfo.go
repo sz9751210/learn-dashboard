@@ -5,6 +5,6 @@ type ContainerInfo struct {
 	Image  string  `json:"image"`
 	Status string  `json:"status"`
 	CPU    float64 `json:"cpu"`
-	Ports  []int   `json:"ports"`
+	Ports  string  `json:"ports"`
 	Memory float64 `json:"memory"`
 }

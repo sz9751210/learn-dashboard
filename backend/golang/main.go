@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
 	"go-dashboard/config"
 	"go-dashboard/handlers"
 	"log"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {

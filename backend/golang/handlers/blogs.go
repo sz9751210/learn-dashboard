@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
 	"go-dashboard/services"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetBlogs(c *gin.Context) {

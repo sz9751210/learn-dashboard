@@ -1,0 +1,4 @@
+[
+  { "ID": "1", "Repository": "nginx", "Tag": "latest", "Size": "132MB" },
+  { "ID": "2", "Repository": "redis", "Tag": "alpine", "Size": "27MB" }
+]

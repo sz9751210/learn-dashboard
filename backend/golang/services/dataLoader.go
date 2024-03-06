@@ -25,6 +25,12 @@ func LoadBlogs() ([]models.Blog, error) {
 	return blogs, err
 }
 
+func LoadImages() ([]models.DockerImage, error) {
+	var images []models.DockerImage
+	err := loadDataFromFile(filepath.Join("mockData", "images.json"), &images)
+	return images, err
+}
+
 func loadDataFromFile(filePath string, data interface{}) error {
 	fileBytes, err := os.ReadFile(filePath)
 	if err != nil {

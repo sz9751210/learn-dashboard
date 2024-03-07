@@ -46,7 +46,7 @@ func LoadContainers() ([]models.ContainerInfo, error) {
 		err := loadDataFromFile(filepath.Join("mockData", "containers.json"), &containers)
 		return containers, err
 	} else {
-		return docker.LoadContainersFromDockerCLI()
+		return docker.LoadContainersFromDockerAPI()
 	}
 }
 

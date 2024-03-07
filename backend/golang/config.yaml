@@ -7,4 +7,4 @@ api:
   getImages:
     mock: true
   getContainers:
-    mock: true
+    mock: false

@@ -46,7 +46,7 @@ func LoadContainersFromDockerAPI() ([]models.ContainerInfo, error) {
 		return nil, err
 	}
 
-	containers, err := cli.ContainerList(context.Background(), container.ListOptions{})
+	containers, err := cli.ContainerList(context.Background(), container.ListOptions{All: true})
 	if err != nil {
 		log.Printf("列出 Docker 容器時出錯: %v", err)
 		return nil, err

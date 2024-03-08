@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "name": "kubemanage",
     "image": "kubernetes:latest",
     "status": "Exited",
@@ -8,6 +9,7 @@
     "memory": 0
   },
   {
+    "id": "2",
     "name": "mysql-1",
     "image": "mysql:8.0",
     "status": "Exited",

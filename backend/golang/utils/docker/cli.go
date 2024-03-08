@@ -58,6 +58,7 @@ func LoadContainersFromDockerAPI() ([]models.ContainerInfo, error) {
 
 		portInfo := formatPorts(c.Ports)
 		containerInfo := models.ContainerInfo{
+			ID:     c.ID,
 			Name:   strings.TrimPrefix(c.Names[0], "/"),
 			Image:  c.Image,
 			Status: c.State,
@@ -94,8 +95,8 @@ func LoadContainerStatsFromCLI(containerID string) (cpuUsage float64, memUsage f
 
 	memUsageStr := strings.Fields(stats[1])[0]           // Assuming MemUsage is in the format "usage/total"
 	memUsageStr = strings.TrimSuffix(memUsageStr, "MiB") // Remove the "MiB" unit
-    memUsageStr = strings.TrimSuffix(memUsageStr, "B") // Remove the "B" unit if present
-    memUsageStr = strings.TrimSuffix(memUsageStr, "iB")
+	memUsageStr = strings.TrimSuffix(memUsageStr, "B")   // Remove the "B" unit if present
+	memUsageStr = strings.TrimSuffix(memUsageStr, "iB")
 	memUsage, err = strconv.ParseFloat(memUsageStr, 64)
 	if err != nil {
 		log.Printf("解析內存使用量失敗: %v", err)

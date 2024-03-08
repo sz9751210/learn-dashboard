@@ -5,9 +5,10 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, getCurrentInstance } from 'vue'
 import { NDataTable } from 'naive-ui'
-import { fetchContainers } from '@/api/container'
+
+const { proxy } = getCurrentInstance()
 
 const columns = [
   {
@@ -39,8 +40,8 @@ const data = ref([])
 
 const loadData = async () => {
   try {
-    const response = await fetchContainers()
-    data.value = response
+    const response = await proxy.$api.getContainers()
+    data.value = response.containerData
   } catch (error) {
     // 考虑添加用户友好的错误处理
     console.error('Error fetching containers:', error)

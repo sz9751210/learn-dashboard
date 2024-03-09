@@ -40,7 +40,7 @@ const data = ref([])
 
 const loadData = async () => {
   try {
-    const response = await proxy.$api.getContainers()
+    const response = await proxy.$api.dockerApi.getContainers()
     data.value = response.containerData
   } catch (error) {
     // 考虑添加用户友好的错误处理

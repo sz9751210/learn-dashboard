@@ -48,14 +48,16 @@
 
 <script setup>
 import { NCard, NSelect, NTag, NPopover } from 'naive-ui'
-import { ref, computed, onMounted } from 'vue'
-import { fetchBooks } from '@/api/books'
+import { ref, computed, onMounted, getCurrentInstance } from 'vue'
+
+const { proxy } = getCurrentInstance()
 
 const cards = ref([])
 
 const loadBooks = async () => {
   try {
-    cards.value = await fetchBooks()
+    const response = await proxy.$api.devopsApi.getBooks()
+    cards.value = response.bookData
   } catch (err) {
     // 處理錯誤，比如顯示用戶友好的錯誤信息
     console.error(err)

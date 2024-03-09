@@ -3,9 +3,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, getCurrentInstance } from 'vue'
 import { NDataTable } from 'naive-ui'
-import { fetchImages } from '@/api/container'
+
+const { proxy } = getCurrentInstance()
 
 const columns = [
   {
@@ -30,8 +31,8 @@ const images = ref([])
 
 const loadImages = async () => {
   try {
-    const response = await fetchImages()
-    images.value = response
+    const response = await proxy.$api.dockerApi.getImages()
+    images.value = response.imageData
   } catch (error) {
     console.error('Error fetching images:', error)
   }

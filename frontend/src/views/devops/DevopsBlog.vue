@@ -22,65 +22,23 @@
 </template>
 
 <script setup>
-import { h, ref, computed } from 'vue'
+import { h, ref, computed, getCurrentInstance, onMounted } from 'vue'
 import { NTag, NButton, NDataTable, NSelect, NCard } from 'naive-ui'
-import { blogs as categoriesData } from '@/api/blog'
 
-const categories = ref(categoriesData)
-// const categories = ref([
-//   {
-//     title: 'Dev-Tools',
-//     repoNames: [
-//       {
-//         key: 1,
-//         blogName: 'Vue Mastery',
-//         author: 'Gregg Pollack',
-//         tags: ['Vue', 'JavaScript'],
-//         url: 'https://www.vuemastery.com/',
-//       },
-//       {
-//         key: 2,
-//         blogName: 'Overreacted',
-//         author: 'Dan Abramov',
-//         tags: ['React', 'JavaScript'],
-//         url: 'https://overreacted.io/',
-//       },
-//       {
-//         key: 3,
-//         blogName: 'CSS-Tricks',
-//         author: 'Chris Coyier',
-//         tags: ['CSS', 'Web Design'],
-//         url: 'https://css-tricks.com/',
-//       },
-//     ],
-//   },
-//   {
-//     title: 'Database',
-//     repoNames: [
-//       {
-//         key: 1,
-//         blogName: 'Vue Mastery',
-//         author: 'Gregg Pollack',
-//         tags: ['Vue', 'JavaScript'],
-//         url: 'https://www.vuemastery.com/',
-//       },
-//       {
-//         key: 2,
-//         blogName: 'Overreacted',
-//         author: 'Dan Abramov',
-//         tags: ['React', 'JavaScript'],
-//         url: 'https://overreacted.io/',
-//       },
-//       {
-//         key: 3,
-//         blogName: 'CSS-Tricks',
-//         author: 'Chris Coyier',
-//         tags: ['CSS', 'Web Design'],
-//         url: 'https://css-tricks.com/',
-//       },
-//     ],
-//   },
-// ])
+const categories = ref([])
+const { proxy } = getCurrentInstance()
+
+const loadData = async () => {
+  try {
+    const response = await proxy.$api.devopsApi.getBlogs()
+    categories.value = response.blogData
+    console.log(categories.value)
+  } catch (error) {
+    console.error('Error fetching containers:', error)
+  }
+}
+
+onMounted(loadData)
 
 const rawData = categories.value.flatMap((category) => category.repoNames)
 

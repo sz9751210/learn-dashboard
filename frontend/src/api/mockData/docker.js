@@ -26,4 +26,15 @@ export default {
       },
     }
   },
+  getImages: () => {
+    return {
+      code: 200,
+      data: {
+        imageData: [
+          { id: '1', repository: 'nginx', tag: 'latest', size: '132MB' },
+          { id: '2', repository: 'redis', tag: 'alpine', size: '27MB' },
+        ],
+      },
+    }
+  },
 }

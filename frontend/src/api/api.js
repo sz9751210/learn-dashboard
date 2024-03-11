@@ -38,6 +38,13 @@ const devopsApi = {
       data: params,
     })
   },
+  addBlog: (blogData) => {
+    return request({
+      url: '/api/blogs',
+      method: 'post',
+      data: blogData,
+    })
+  },
   getRoadmap(params) {
     return request({
       url: '/api/roadmap',

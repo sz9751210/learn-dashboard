@@ -1,5 +1,6 @@
 <template>
   <n-space vertical :size="12">
+    <n-button @click="showAddBlogDialog">新增 Blog</n-button>
     <!-- 為 n-select 添加一個外部容器 -->
     <div class="select-container">
       <n-select v-model:value="selectedTags" :options="tagOptions" multiple placeholder="Select tags" />
@@ -23,10 +24,18 @@
 
 <script setup>
 import { h, ref, computed, getCurrentInstance, onMounted } from 'vue'
-import { NTag, NButton, NDataTable, NSelect, NCard } from 'naive-ui'
+import { NButton, NDataTable, NSelect, NCard, NForm, NFormItem, NInput, NTag, useDialog, useMessage } from 'naive-ui'
 
 const categories = ref([])
 const { proxy } = getCurrentInstance()
+const dialog = useDialog()
+const message = useMessage()
+const blogForm = ref({
+  title: '',
+  blogName: '',
+  tags: '',
+  url: '',
+})
 
 const loadData = async () => {
   try {
@@ -38,6 +47,72 @@ const loadData = async () => {
   }
 }
 
+// 顯示新增 Blog 的 Dialog
+const showAddBlogDialog = () => {
+  dialog.create({
+    title: '新增 Blog',
+    content: () => {
+      return h(NForm, [
+        h(NFormItem, { label: 'Title' }, () =>
+          h(NInput, {
+            value: blogForm.value.title,
+            'onUpdate:value': (val) => (blogForm.value.title = val),
+          })
+        ),
+        h(NFormItem, { label: 'Blog Name' }, () =>
+          h(NInput, {
+            value: blogForm.value.blogName,
+            'onUpdate:value': (val) => (blogForm.value.blogName = val),
+          })
+        ),
+        h(NFormItem, { label: 'Tags' }, () =>
+          h(NInput, {
+            value: blogForm.value.tags,
+            'onUpdate:value': (val) => (blogForm.value.tags = val),
+          })
+        ),
+        h(NFormItem, { label: 'URL' }, () =>
+          h(NInput, {
+            value: blogForm.value.url,
+            'onUpdate:value': (val) => (blogForm.value.url = val),
+          })
+        ),
+      ])
+    },
+    positiveText: '提交',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      addBlog()
+    },
+  })
+}
+
+// 將新 Blog 添加到對應的 category
+const addBlog = () => {
+  const newBlog = {
+    blogName: blogForm.value.blogName,
+    tags: blogForm.value.tags.split(',').map((tag) => tag.trim()),
+    url: blogForm.value.url,
+  }
+
+  // 尋找是否已存在該 title 的 category
+  const existingCategoryIndex = categories.value.findIndex((category) => category.title === blogForm.value.title)
+
+  if (existingCategoryIndex !== -1) {
+    // 如果找到，則將新 blog 添加到該 category 的 repoNames 中
+    categories.value[existingCategoryIndex].repoNames.push(newBlog)
+  } else {
+    // 如果沒找到，則創建一個新的 category
+    categories.value.push({
+      title: blogForm.value.title,
+      repoNames: [newBlog],
+    })
+  }
+
+  message.success('Blog 添加成功')
+  dialog.destroyAll() // 關閉對話框
+  blogForm.value = { title: '', blogName: '', tags: '', url: '' } // 重置表單
+}
 onMounted(loadData)
 
 const rawData = categories.value.flatMap((category) => category.repoNames)

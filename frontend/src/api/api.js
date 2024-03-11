@@ -38,6 +38,13 @@ const devopsApi = {
       data: params,
     })
   },
+  getRoadmap(params) {
+    return request({
+      url: '/api/roadmap',
+      method: 'get',
+      data: params,
+    })
+  },
 }
 
 export { dockerApi, devopsApi }

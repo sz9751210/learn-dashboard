@@ -32,14 +32,17 @@ export default {
       data: {
         blogData: [
           {
+            id: 1, // 給每個 category 增加一個唯一的 id
             title: 'DevOps',
             repoNames: [
               {
+                id: 101, // 給每個 blog 增加一個唯一的 id
                 blogName: "Tony.Wu's Blog",
                 tags: ['Devops'],
                 url: 'https://www.itnotetk.com/',
               },
               {
+                id: 102, // 確保每個 id 都是唯一的
                 blogName: '运维咖啡吧',
                 tags: ['Devops'],
                 url: 'https://blog.ops-coffee.cn/',
@@ -47,14 +50,17 @@ export default {
             ],
           },
           {
+            id: 2, // 繼續為每個 category 指定唯一的 id
             title: 'Backend',
             repoNames: [
               {
+                id: 201,
                 blogName: 'Learn or Die',
                 tags: ['GCP', 'Devops'],
                 url: 'https://tn710617.github.io/zh-tw/about/',
               },
               {
+                id: 202,
                 blogName: 'Alan Tsai 的學習筆記',
                 tags: ['Devops', 'Azure', 'Docker'],
                 url: 'https://blog.alantsai.net/',

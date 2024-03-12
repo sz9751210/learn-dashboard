@@ -1,4 +1,4 @@
-.PHONY: run build clean test
+.PHONY: run build clean test up-mongo
 
 run:
 	@go run main.go
@@ -8,3 +8,6 @@ build:
 
 clean:
 	@rm -f myapp
+
+up-mongo:
+	docker-compose up -d

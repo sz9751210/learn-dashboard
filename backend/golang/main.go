@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"go-dashboard/config"
 	"go-dashboard/handlers"
 	"log"
@@ -12,6 +13,12 @@ import (
 func main() {
 
 	config.LoadConfig()
+	client := config.ConnectMongoDB()
+	defer func() {
+		if err := client.Disconnect(context.TODO()); err != nil {
+			panic(err)
+		}
+	}()
 
 	router := gin.Default()
 

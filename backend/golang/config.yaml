@@ -8,3 +8,9 @@ api:
     mock: true
   getContainers:
     mock: false
+mongodb:
+  host: "localhost"
+  port: 27017
+  database: "vue"
+  username: "rootuser"
+  password: "rootpass"

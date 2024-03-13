@@ -7,10 +7,10 @@ import request from './request'
 const dockerApi = {
   getContainers(params) {
     return request({
-      url: '/docker/containers',
+      url: '/api/containers',
       method: 'get',
       data: params,
-      mock: true,
+      mock: false,
     })
   },
   getImages(params) {

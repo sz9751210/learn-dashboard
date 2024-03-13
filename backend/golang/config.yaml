@@ -7,7 +7,7 @@ api:
   getImages:
     mock: true
   getContainers:
-    mock: false
+    mock: true
 mongodb:
   host: "localhost"
   port: 27017

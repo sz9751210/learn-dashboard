@@ -3,7 +3,7 @@ export default {
     return {
       code: 200,
       data: {
-        containerData: [
+        data: [
           {
             id: '1',
             name: 'kubemanage',
@@ -30,7 +30,7 @@ export default {
     return {
       code: 200,
       data: {
-        imageData: [
+        data: [
           { id: '1', repository: 'nginx', tag: 'latest', size: '132MB' },
           { id: '2', repository: 'redis', tag: 'alpine', size: '27MB' },
         ],

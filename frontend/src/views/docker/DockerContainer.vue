@@ -12,6 +12,10 @@ const { proxy } = getCurrentInstance()
 
 const columns = [
   {
+    title: 'ID',
+    key: 'id',
+  },
+  {
     title: 'Name',
     key: 'name',
   },
@@ -34,6 +38,10 @@ const columns = [
     //   return row.ports.join(', ')
     // },
   },
+  {
+    title: 'Mem',
+    key: 'memory',
+  },
 ]
 
 const data = ref([])
@@ -41,7 +49,7 @@ const data = ref([])
 const loadData = async () => {
   try {
     const response = await proxy.$api.dockerApi.getContainers()
-    data.value = response.containerData
+    data.value = response.data
   } catch (error) {
     // 考虑添加用户友好的错误处理
     console.error('Error fetching containers:', error)

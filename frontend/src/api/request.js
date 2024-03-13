@@ -1,6 +1,6 @@
 import axios from 'axios'
 import config from '../config/index.js'
-const NETWORK_ERROR = '网络请求错误,请稍后重试'
+const NETWORK_ERROR = '網路請求錯誤，請稍後再試'
 
 const service = axios.create({
   baseURL: config.baseApi,
@@ -9,20 +9,29 @@ const service = axios.create({
 
 // [3.1] 请求拦截器：在请求正式发出前执行
 service.interceptors.request.use((req) => {
-  console.log('Request Base URL:', service.defaults.baseURL)
+  // console.log('Request Base URL:', service.defaults.baseURL)
   return req
 })
 
 // [4] 响应拦截器：请求成功后，响应返回前执行
 service.interceptors.response.use((res) => {
-  console.log(res)
-  // [4.1] 检查响应的 code，决定是直接返回数据还是显示错误并拒绝 Promise
-  const { code, data, msg } = res.data
-  console.log('data', res)
-  if (code === 200) {
-    return data
+  let isMock = config.mock
+  console.log('res', res)
+  if (isMock) {
+    const { code, data, msg } = res.data
+    console.log('data', data)
+    if (code === 200) {
+      return data
+    } else {
+      return Promise.reject(msg || NETWORK_ERROR)
+    }
   } else {
-    return Promise.reject(msg || NETWORK_ERROR)
+    const { status } = res
+    if (status === 200) {
+      return res
+    } else {
+      return Promise.reject(msg || NETWORK_ERROR)
+    }
   }
 })
 
@@ -44,7 +53,7 @@ function request(options) {
     service.defaults.baseURL = config.baseApi
   } else {
     service.defaults.baseURL = isMock ? config.mockApi : config.baseApi
-    console.log('service.defaults.baseURL', service.defaults.baseURL)
+    // console.log('service.defaults.baseURL', service.defaults.baseURL)
   }
 
   // [3] 发起请求。在这一步，请求拦截器被触发

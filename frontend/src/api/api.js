@@ -52,6 +52,14 @@ const devopsApi = {
       data: params,
     })
   },
+  getSSLCertificate(params) {
+    return request({
+      url: '/api/ssl',
+      method: 'get',
+      data: params,
+      mock: true,
+    })
+  },
 }
 
 export { dockerApi, devopsApi }

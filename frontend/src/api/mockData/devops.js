@@ -30,7 +30,7 @@ export default {
     return {
       code: 200,
       data: {
-        blogData: [
+        data: [
           {
             id: 1, // 給每個 category 增加一個唯一的 id
             title: 'DevOps',
@@ -320,6 +320,33 @@ export default {
                 link: 'https://kustomize.io/',
               },
             ],
+          },
+        ],
+      },
+    }
+  },
+  getSSLCerificate: () => {
+    return {
+      status: 200,
+      data: {
+        data: [
+          {
+            domain: 'a.com',
+            expiry: '2025-03-19 23:59:59 UTC',
+            issuer:
+              'CN=Sectigo RSA Domain Validation Secure Server CA,O=Sectigo Limited,L=Salford,ST=Greater Manchester,C=GB',
+            subject: 'CN=*.a.com',
+            serial_number: '205711757175358895209486912598829571259',
+            signature_algorithm: 'SHA256-RSA',
+          },
+          {
+            domain: 'b.com',
+            expiry: '2025-02-09 23:59:59 UTC',
+            issuer:
+              'CN=Sectigo RSA Domain Validation Secure Server CA,O=Sectigo Limited,L=Salford,ST=Greater Manchester,C=GB',
+            subject: 'CN=*.b.com',
+            serial_number: '205711757175358895209486912598829571259',
+            signature_algorithm: 'SHA256-RSA',
           },
         ],
       },

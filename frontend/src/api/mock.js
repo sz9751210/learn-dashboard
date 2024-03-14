@@ -5,6 +5,7 @@ Mock.mock(/api\/containers/, 'get', dockerApi.getContainers)
 Mock.mock(/docker\/images/, 'get', dockerApi.getImages)
 // bevops api
 Mock.mock(/api\/books/, 'get', devopsApi.getBooks)
+Mock.mock(/mock\/api\/ssl/, 'get', devopsApi.getSSLCerificate)
 
 // blog api
 Mock.mock(/api\/blogs/, 'get', devopsApi.getBlogs)

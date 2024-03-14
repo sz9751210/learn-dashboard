@@ -44,6 +44,14 @@ export const devopsRoutes = [
           title: 'Book List',
         },
       },
+      {
+        name: 'SSL certificate',
+        path: 'ssl-certificate',
+        component: () => import('@/views/devops/SSLCertificate.vue'),
+        meta: {
+          title: 'SSL Certificate',
+        },
+      },
     ],
   },
 ]

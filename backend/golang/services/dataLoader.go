@@ -50,6 +50,17 @@ func LoadContainers() ([]models.ContainerInfo, error) {
 	}
 }
 
+func LoadSSL() ([]models.SSLInfo, error) {
+	if config.ShouldMock("getSSL") {
+
+		var ssls []models.SSLInfo
+		err := loadDataFromFile(filepath.Join("mockData", "ssl.json"), &ssls)
+		return ssls, err
+	} else {
+		return nil, nil
+	}
+}
+
 func loadDataFromFile(filePath string, data interface{}) error {
 	fileBytes, err := os.ReadFile(filePath)
 	if err != nil {

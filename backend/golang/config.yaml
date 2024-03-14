@@ -8,6 +8,8 @@ api:
     mock: true
   getContainers:
     mock: true
+  getSSL:
+    mock: true
 mongodb:
   host: "localhost"
   port: 27017

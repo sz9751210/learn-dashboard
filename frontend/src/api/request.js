@@ -15,23 +15,21 @@ service.interceptors.request.use((req) => {
 
 // [4] 响应拦截器：请求成功后，响应返回前执行
 service.interceptors.response.use((res) => {
-  let isMock = config.mock
-  console.log('res', res)
-  if (isMock) {
-    const { code, data, msg } = res.data
-    console.log('data', data)
-    if (code === 200) {
-      return data
+  const { status } = res
+  // console.log('res data', res.data)
+  if (status === 200) {
+    if (res && res.data && res.data.data && res.data.data.data) {
+      console.log('resp mock', res.data.data.data)
+      return res.data.data.data
+    } else if (res && res.data) {
+      console.log('resp !mock', res.data)
+      return res.data
     } else {
-      return Promise.reject(msg || NETWORK_ERROR)
+      console.log('error')
     }
+    // return res
   } else {
-    const { status } = res
-    if (status === 200) {
-      return res
-    } else {
-      return Promise.reject(msg || NETWORK_ERROR)
-    }
+    return Promise.reject(NETWORK_ERROR)
   }
 })
 

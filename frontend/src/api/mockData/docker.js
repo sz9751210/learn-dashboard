@@ -1,7 +1,7 @@
 export default {
   getContainers: () => {
     return {
-      code: 200,
+      status: 200,
       data: {
         data: [
           {
@@ -28,7 +28,7 @@ export default {
   },
   getImages: () => {
     return {
-      code: 200,
+      status: 200,
       data: {
         data: [
           { id: '1', repository: 'nginx', tag: 'latest', size: '132MB' },

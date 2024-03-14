@@ -29,6 +29,7 @@ const devopsApi = {
       url: '/api/books',
       method: 'get',
       data: params,
+      mock: true,
     })
   },
   getBlogs(params) {
@@ -36,6 +37,7 @@ const devopsApi = {
       url: '/api/blogs',
       method: 'get',
       data: params,
+      mock: true,
     })
   },
   addBlog: (blogData) => {
@@ -43,6 +45,7 @@ const devopsApi = {
       url: '/api/blogs',
       method: 'post',
       data: blogData,
+      mock: true,
     })
   },
   getRoadmap(params) {
@@ -50,6 +53,7 @@ const devopsApi = {
       url: '/api/roadmap',
       method: 'get',
       data: params,
+      mock: true,
     })
   },
   getSSLCertificate(params) {

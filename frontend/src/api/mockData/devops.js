@@ -1,9 +1,9 @@
 export default {
   getBooks: () => {
     return {
-      code: 200,
+      status: 200,
       data: {
-        bookData: [
+        data: [
           {
             title: '鳳凰專案｜看 IT部門如何讓公司從谷底翻身的傳奇故事',
             coverUrl:
@@ -28,7 +28,7 @@ export default {
   },
   getBlogs: () => {
     return {
-      code: 200,
+      status: 200,
       data: {
         data: [
           {
@@ -73,9 +73,9 @@ export default {
   },
   getRoadmap: () => {
     return {
-      code: 200,
+      status: 200,
       data: {
-        roadmapData: [
+        data: [
           {
             title: 'Learn a Programming Language',
             cardList: [

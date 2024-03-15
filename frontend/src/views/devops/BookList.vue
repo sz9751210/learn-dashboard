@@ -57,7 +57,7 @@ const cards = ref([])
 const loadBooks = async () => {
   try {
     const response = await proxy.$api.devopsApi.getBooks()
-    cards.value = response.bookData
+    cards.value = response
   } catch (err) {
     // 處理錯誤，比如顯示用戶友好的錯誤信息
     console.error(err)

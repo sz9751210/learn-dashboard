@@ -54,7 +54,7 @@ const blogForm = ref({
 const loadData = async () => {
   try {
     const response = await proxy.$api.devopsApi.getBlogs()
-    categories.value = response.blogData
+    categories.value = response
     console.log(categories.value)
   } catch (error) {
     console.error('Error fetching containers:', error)

@@ -32,7 +32,7 @@ const images = ref([])
 const loadImages = async () => {
   try {
     const response = await proxy.$api.dockerApi.getImages()
-    images.value = response.imageData
+    images.value = response
   } catch (error) {
     console.error('Error fetching images:', error)
   }

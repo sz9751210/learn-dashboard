@@ -49,7 +49,7 @@ const data = ref([])
 const loadData = async () => {
   try {
     const response = await proxy.$api.dockerApi.getContainers()
-    data.value = response.data
+    data.value = response
   } catch (error) {
     // 考虑添加用户友好的错误处理
     console.error('Error fetching containers:', error)

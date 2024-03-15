@@ -10,7 +10,7 @@ const dockerApi = {
       url: '/api/containers',
       method: 'get',
       data: params,
-      mock: false,
+      mock: true,
     })
   },
   getImages(params) {

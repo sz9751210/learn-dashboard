@@ -15,7 +15,7 @@ const { proxy } = getCurrentInstance()
 const loadData = async () => {
   try {
     const response = await proxy.$api.devopsApi.getRoadmap()
-    roadmap.value = response.roadmapData
+    roadmap.value = response
     console.log(roadmap.value)
   } catch (error) {
     console.error('Error fetching containers:', error)

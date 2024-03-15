@@ -1,19 +1,25 @@
 <script setup>
 import { NMenu } from 'naive-ui'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
+import { computed, h } from 'vue'
 // 从路由配置文件中导入所有异步路由和基础路由
 import { basicRoutes } from '@/router/routes'
+import { useAppStore } from '@/store/modules/app'
+import { BookOutline as BookIcon } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
 
+const appStore = useAppStore
 const router = useRouter()
-
 const { currentRoute } = router
 const routes = basicRoutes
-console.log('basic Routes', basicRoutes)
+
+// console.log('basic Routes', basicRoutes)
 
 const menuOptions = computed(() => {
   return generateOptions(routes, '')
 })
+
+const sideMenuStyle = computed(() => (appStore.isCollaps ? '50px' : '200px'))
 
 function resolvePath(...pathes) {
   return (
@@ -25,15 +31,35 @@ function resolvePath(...pathes) {
   )
 }
 
+function renderIcon(icon) {
+  return () => h(NIcon, null, { default: () => h(icon) })
+}
+
+// function resolvePath(...pathes) {
+//   const combinePath = pathes.reduce((basePath, currentPath) => {
+//     if (!currentPath || currentPath === '/') {
+//       return basePath
+//     }
+//     const strippedPath = currentPath.replace(/^\/|\/$/g, '')
+//     return `${basePath}/${strippedPath}`
+//   }, '')
+//   return `${combinePath}`
+// }
+
 function generateOptions(routes, basePath) {
+  console.log('routes', routes)
+  console.log('basePath', basePath)
   let options = []
   routes.forEach((route) => {
     if (route.name && !route.isHidden) {
+      console.log('route', route)
       let curOption = {
         label: (route.meta && route.meta.title) || route.name,
         key: route.name,
+        icon: renderIcon(BookIcon),
         path: resolvePath(basePath, route.path),
       }
+      console.log('curOption', curOption)
       if (route.children && route.children.length) {
         curOption.children = generateOptions(route.children, resolvePath(basePath, route.path))
       }
@@ -46,6 +72,7 @@ function generateOptions(routes, basePath) {
       options.push(curOption)
     }
   })
+  console.log('option', options)
   return options
 }
 
@@ -57,6 +84,7 @@ function handleMenuSelect(key, item) {
 <template>
   <n-menu
     class="side-menu"
+    :style="sideMenuStyle"
     :root-indent="20"
     :options="menuOptions"
     :value="(currentRoute.meta && currentRoute.meta.activeMenu) || currentRoute.name"
@@ -110,8 +138,8 @@ function handleMenuSelect(key, item) {
         margin: auto;
         width: 5px;
         height: 5px;
-        border-radius: 50%;
-        border: 1px solid #333;
+        // border-radius: 50%;
+        // border: 1px solid #333;
       }
     }
   }

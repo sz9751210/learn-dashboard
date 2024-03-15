@@ -1,11 +1,16 @@
 <script setup>
 // 从 'naive-ui' 中导入所需的布局组件
 import { NLayout, NLayoutHeader, NLayoutSider } from 'naive-ui'
-
+import { computed } from 'vue'
 // 从本地组件中导入应用的头部、侧边导航和主内容组件
 import AppHeader from './components/header/index.vue'
 import SideMenu from './components/sidebar/index.vue'
 import AppMain from './components/AppMain.vue'
+import { useAppStore } from '@/store/modules/app'
+const appStore = useAppStore()
+
+const siderWidth = computed(() => (appStore.isCollapse ? '50px' : '200px'))
+console.log(siderWidth.value)
 </script>
 
 <template>
@@ -13,7 +18,14 @@ import AppMain from './components/AppMain.vue'
     <!-- 使用 NLayout 创建一个具有侧边栏的布局 -->
     <n-layout has-sider position="absolute">
       <!-- 侧边栏部分，设置固定宽度和收缩宽度 -->
-      <n-layout-sider :width="200" :collapsed-width="0" :native-scrollbar="false">
+      <n-layout-sider
+        bordered
+        :collapsed="appStore.isCollapse"
+        collapse-mode="width"
+        :collapsed-width="60"
+        :width="240"
+        :native-scrollbar="false"
+      >
         <!-- 侧边栏菜单组件 -->
         <side-menu />
       </n-layout-sider>
@@ -38,3 +50,11 @@ import AppMain from './components/AppMain.vue'
     </n-layout>
   </div>
 </template>
+<style scoped>
+::v-deep .n-layout-toggle-button {
+  /* 自定义触发器样式 */
+  background-color: #0c8243; /* 示例：修改背景颜色 */
+  color: rgb(255, 255, 255); /* 示例：修改图标颜色 */
+  top: 100px;
+}
+</style>

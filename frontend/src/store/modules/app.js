@@ -18,6 +18,12 @@ export const useAppStore = defineStore('app', {
           successColorSuppl: '#316c72', // 成功状态颜色补充
         },
       },
+      isCollapse: false, // 是否折叠菜单
     }
+  },
+  actions: {
+    toggleCollapse() {
+      this.isCollapse = !this.isCollapse
+    },
   },
 })

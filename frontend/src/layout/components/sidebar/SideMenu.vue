@@ -5,7 +5,7 @@ import { computed, h } from 'vue'
 // 从路由配置文件中导入所有异步路由和基础路由
 import { basicRoutes } from '@/router/routes'
 import { useAppStore } from '@/store/modules/app'
-import { BookOutline as BookIcon } from '@vicons/ionicons5'
+import { BookOutline as BookIcon, Attach } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
 
 const appStore = useAppStore
@@ -34,17 +34,13 @@ function resolvePath(...pathes) {
 function renderIcon(icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
-
-// function resolvePath(...pathes) {
-//   const combinePath = pathes.reduce((basePath, currentPath) => {
-//     if (!currentPath || currentPath === '/') {
-//       return basePath
-//     }
-//     const strippedPath = currentPath.replace(/^\/|\/$/g, '')
-//     return `${basePath}/${strippedPath}`
-//   }, '')
-//   return `${combinePath}`
-// }
+function renderBorderIcon() {
+  return () =>
+    h('div', {
+      style:
+        'width: 5px; height: 5px; border-radius: 50%; border: 1px solid #333; display: flex; justify-content: center; align-items: center;',
+    })
+}
 
 function generateOptions(routes, basePath) {
   console.log('routes', routes)
@@ -56,7 +52,7 @@ function generateOptions(routes, basePath) {
       let curOption = {
         label: (route.meta && route.meta.title) || route.name,
         key: route.name,
-        icon: renderIcon(BookIcon),
+        icon: route.meta.icon ? renderIcon(route.meta.icon) : renderBorderIcon(),
         path: resolvePath(basePath, route.path),
       }
       console.log('curOption', curOption)

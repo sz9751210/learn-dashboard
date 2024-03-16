@@ -30,7 +30,7 @@ function handleCollapse() {
 <template>
   <div>
     <!-- 渲染面包屑組件 -->
-    <n-button @click="handleCollapse">
+    <n-button style="position: relative; top: -5px; border: 1px solid #0e7a0d" @click="handleCollapse">
       <n-icon color="#0e7a0d">
         <!-- <arrow-alt-circle-left v-if="appStore.isCollapse" /> -->
         <!-- <game-controller /> -->

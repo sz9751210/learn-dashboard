@@ -4,6 +4,7 @@ import devopsRoutes from './modules/devops'
 import NotFound from '@/views/error-page/404.vue'
 import k8sRoutes from './modules/k8s'
 import dockerRoutes from './modules/docker'
+import { Home } from '@vicons/ionicons5'
 
 // 基础路由配置数组，包含了应用中的一些基本路由
 export const basicRoutes = [
@@ -51,6 +52,7 @@ export const basicRoutes = [
         component: Dashboard,
         meta: {
           title: 'Dashboard',
+          icon: Home,
         },
       },
     ],

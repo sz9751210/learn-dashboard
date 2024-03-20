@@ -1,13 +1,6 @@
 package models
 
-import (
-	"context"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-)
-
-type BlogRepository interface {
-	LoadBlogs(ctx context.Context) ([]Blog, error)
-}
+import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type Blog struct {
 	ID        primitive.ObjectID `json:"id" bson:"_id,omitempty"`

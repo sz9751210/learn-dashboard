@@ -11,3 +11,6 @@ clean:
 
 up-mongo:
 	docker-compose up -d
+
+down-mongo:
+	docker-compose down -v

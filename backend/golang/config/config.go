@@ -2,13 +2,18 @@ package config
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"go-dashboard/models"
+	"log"
+	"os"
+	"time"
+
 	"github.com/spf13/viper"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
-	"log"
-	"time"
 )
 
 var Config Configuration
@@ -67,6 +72,46 @@ func ConnectMongoDB() *mongo.Client {
 
 	fmt.Println("Connected to MongoDB successfully")
 	return client
+}
+
+func InitMockData(client *mongo.Client, databaseName string, collectionName string, mockDataFilePath string) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// 讀取mockData.json檔案
+	bytes, err := os.ReadFile(mockDataFilePath)
+	if err != nil {
+		log.Fatalf("Error reading mock data file: %v", err)
+	}
+
+	// 解析JSON數據
+	var blogs []models.Blog
+	if err := json.Unmarshal(bytes, &blogs); err != nil {
+		log.Fatalf("Error unmarshalling mock data: %v", err)
+	}
+
+	for i := range blogs {
+		blogs[i].ID = primitive.NewObjectID()
+		for j := range blogs[i].RepoNames {
+			blogs[i].RepoNames[j].ID = primitive.NewObjectID()
+		}
+	}
+
+	// 獲取集合的句柄
+	collection := client.Database(databaseName).Collection(collectionName)
+
+	var documents []interface{}
+	for _, blog := range blogs {
+		documents = append(documents, blog)
+	}
+
+	// 插入數據到MongoDB
+	result, err := collection.InsertMany(ctx, documents)
+	if err != nil {
+		log.Fatalf("Error inserting mock data into MongoDB: %v", err)
+	}
+
+	fmt.Printf("Inserted %d documents into collection %s\n", len(result.InsertedIDs), collectionName)
 }
 
 func ShouldMock(apiName string) bool {

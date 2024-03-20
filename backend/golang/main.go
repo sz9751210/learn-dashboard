@@ -20,10 +20,16 @@ func main() {
 		}
 	}()
 
+	databaseName := "go-dashboard"
+	collectionName := "blogs"
+	mockDataFilePath := "./mockData/blogs.json"
+
+	config.InitMockData(client, databaseName, collectionName, mockDataFilePath)
+
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://127.0.0.1:3100", "http://localhost:3100"},   // 允許這個源的跨域請求
+		AllowOrigins:     []string{"http://127.0.0.1:3100", "http://localhost:3100","http://localhost","http://127.0.0.1"},   // 允許這個源的跨域請求
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"}, // 允許的HTTP方法
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -31,13 +37,13 @@ func main() {
 	}))
 
 	router.GET("/api/books", handlers.GetBooks)
-	router.GET("/api/blogs", handlers.GetBlogs)
+	router.GET("/api/blogs", handlers.GetBlogs(client))
 	router.GET("/api/containers", handlers.GetContainers)
 	router.GET("/api/images", handlers.GetImages)
 	// router.GET("/api/ssl", handlers.GetSSLCertificateInfo)
 	router.GET("/api/ssl", handlers.GetSSL)
 
-	if err := router.Run(":8080"); err != nil {
+	if err := router.Run(":8081"); err != nil {
 		log.Fatalf("Failed to run server: %v", err)
 	}
 }

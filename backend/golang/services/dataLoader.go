@@ -1,12 +1,16 @@
 package services
 
 import (
+	"context"
 	"encoding/json"
 	"go-dashboard/config"
 	"go-dashboard/models"
+	"go-dashboard/repository"
 	"go-dashboard/utils/docker"
 	"os"
 	"path/filepath"
+
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func LoadBooks() ([]models.Book, error) {
@@ -19,13 +23,15 @@ func LoadBooks() ([]models.Book, error) {
 	}
 }
 
-func LoadBlogs() ([]models.Blog, error) {
+func LoadBlogs(client *mongo.Client) ([]models.Blog, error) {
 	if config.ShouldMock("getBlogs") {
 		var blogs []models.Blog
 		err := loadDataFromFile(filepath.Join("mockData", "blogs.json"), &blogs)
 		return blogs, err
 	} else {
-		return nil, nil
+		ctx := context.TODO()
+		repo := repository.NewMongoBlogRepository(client)
+		return repo.LoadBlogs(ctx)
 	}
 }
 

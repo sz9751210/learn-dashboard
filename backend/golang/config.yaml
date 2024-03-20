@@ -3,7 +3,7 @@ api:
   getBooks:
     mock: true
   getBlogs:
-    mock: true
+    mock: false
   getImages:
     mock: true
   getContainers:

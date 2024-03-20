@@ -1,14 +1,23 @@
 package models
 
+import (
+	"context"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
+
+type BlogRepository interface {
+	LoadBlogs(ctx context.Context) ([]Blog, error)
+}
+
 type Blog struct {
-	ID        uint   `json:"id"` // 給 Blog 增加一個唯一標識符 ID
-	Title     string `json:"title"`
-	RepoNames []Repo `json:"repoNames"`
+	ID        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Title     string             `json:"title" bson:"title"`
+	RepoNames []Repo             `json:"repoNames" bson:"repoNames"`
 }
 
 type Repo struct {
-	ID       uint     `json:"id"` // 給 Repo 增加一個唯一標識符 ID
-	BlogName string   `json:"blogName"`
-	Tags     []string `json:"tags"`
-	Url      string   `json:"url"`
+	ID       primitive.ObjectID `json:"id" bson:"id,omitempty"`
+	BlogName string             `json:"blogName" bson:"blogName"`
+	Tags     []string           `json:"tags" bson:"tags"`
+	Url      string             `json:"url" bson:"url"`
 }

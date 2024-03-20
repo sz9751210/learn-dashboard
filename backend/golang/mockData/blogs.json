@@ -1,16 +1,13 @@
 [
   {
-    "id": 1,
     "title": "DevOps",
     "repoNames": [
       {
-        "id": 101,
         "blogName": "Tony.Wu's Blog",
         "tags": ["Devops"],
         "url": "https://www.itnotetk.com/"
       },
       {
-        "id": 102,
         "blogName": "运维咖啡吧",
         "tags": ["Devops"],
         "url": "https://blog.ops-coffee.cn/"
@@ -18,17 +15,14 @@
     ]
   },
   {
-    "id": 2,
     "title": "Backend",
     "repoNames": [
       {
-        "id": 201,
         "blogName": "Learn or Die",
         "tags": ["GCP", "Devops"],
         "url": "https://tn710617.github.io/zh-tw/about/"
       },
       {
-        "id": 202,
         "blogName": "Alan Tsai 的學習筆記",
         "tags": ["Devops", "Azure", "Docker"],
         "url": "https://blog.alantsai.net/"

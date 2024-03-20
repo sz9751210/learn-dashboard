@@ -3,7 +3,9 @@ package repository
 import (
 	"context"
 	"go-dashboard/models"
+
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -44,4 +46,20 @@ func (r *MongoBlogRepository) CreateBlog(ctx context.Context, blog models.Blog) 
 	collection := r.client.Database("go-dashboard").Collection("blogs")
 	result, err := collection.InsertOne(ctx, blog)
 	return result, err
+}
+
+func (r *MongoBlogRepository) UpdateBlog(ctx context.Context, blog models.Blog) (*mongo.UpdateResult, error) {
+	collection := r.client.Database("go-dashboard").Collection("blogs")
+	filter := bson.M{"_id": blog.ID}
+	update := bson.M{"$set": blog}
+	result, err := collection.UpdateOne(ctx, filter, update)
+	return result, err
+}
+
+func (r *MongoBlogRepository) UpdateRepo(ctx context.Context, blogID primitive.ObjectID, repo models.Repo) error {
+	collection := r.client.Database("go-dashboard").Collection("blogs")
+	filter := bson.M{"_id": blogID, "repoNames.id": repo.ID}
+	update := bson.M{"$set": bson.M{"repoNames.$": repo}}
+	_, err := collection.UpdateOne(ctx, filter, update)
+	return err
 }

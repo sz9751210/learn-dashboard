@@ -48,7 +48,7 @@ func (bs *BlogService) LoadBlogs(ctx context.Context) ([]models.Blog, error) {
 
 func (bs *BlogService) CreateBlog(ctx context.Context, blog models.Blog) (*models.Blog, error) {
 	blog.RepoNames[0].ID = primitive.NewObjectID()
-	
+
 	result, err := bs.repo.CreateBlog(ctx, blog)
 	if err != nil {
 		return nil, err
@@ -58,6 +58,17 @@ func (bs *BlogService) CreateBlog(ctx context.Context, blog models.Blog) (*model
 	return &blog, nil
 }
 
+func (bs *BlogService) UpdateBlog(ctx context.Context, blog models.Blog) (*models.Blog, error) {
+	_, err := bs.repo.UpdateBlog(ctx, blog)
+	if err != nil {
+		return nil, err
+	}
+	return &blog, nil
+}
+
+func (bs *BlogService) UpdateRepo(ctx context.Context, blogID primitive.ObjectID, repo models.Repo) error {
+	return bs.repo.UpdateRepo(ctx, blogID, repo)
+}
 
 func LoadImages() ([]models.DockerImage, error) {
 	if config.ShouldMock("getImages") {

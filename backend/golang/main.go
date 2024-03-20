@@ -45,6 +45,8 @@ func main() {
 	router.GET("/api/books", handlers.GetBooks)
 	router.GET("/api/blogs", blogHandler.GetBlogs)
 	router.POST("/api/blogs", blogHandler.CreateBlog)
+	// router.PUT("/api/blogs/:id", blogHandler.UpdateBlog)
+	router.PUT("/api/blogs/:blogID/repos/:repoID", blogHandler.UpdateRepo)
 	router.GET("/api/containers", handlers.GetContainers)
 	router.GET("/api/images", handlers.GetImages)
 	// router.GET("/api/ssl", handlers.GetSSLCertificateInfo)

@@ -44,6 +44,7 @@ func main() {
 
 	router.GET("/api/books", handlers.GetBooks)
 	router.GET("/api/blogs", blogHandler.GetBlogs)
+	router.POST("/api/blogs", blogHandler.CreateBlog)
 	router.GET("/api/containers", handlers.GetContainers)
 	router.GET("/api/images", handlers.GetImages)
 	// router.GET("/api/ssl", handlers.GetSSLCertificateInfo)

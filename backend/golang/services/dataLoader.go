@@ -9,6 +9,8 @@ import (
 	"go-dashboard/utils/docker"
 	"os"
 	"path/filepath"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type BlogService struct {
@@ -43,6 +45,19 @@ func (bs *BlogService) LoadBlogs(ctx context.Context) ([]models.Blog, error) {
 		return bs.repo.LoadBlogs(ctx)
 	}
 }
+
+func (bs *BlogService) CreateBlog(ctx context.Context, blog models.Blog) (*models.Blog, error) {
+	blog.RepoNames[0].ID = primitive.NewObjectID()
+	
+	result, err := bs.repo.CreateBlog(ctx, blog)
+	if err != nil {
+		return nil, err
+	}
+
+	blog.ID = result.InsertedID.(primitive.ObjectID)
+	return &blog, nil
+}
+
 
 func LoadImages() ([]models.DockerImage, error) {
 	if config.ShouldMock("getImages") {

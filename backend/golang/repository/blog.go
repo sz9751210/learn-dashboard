@@ -3,8 +3,8 @@ package repository
 import (
 	"context"
 	"go-dashboard/models"
-	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type MongoBlogRepository struct {
@@ -38,4 +38,10 @@ func (r *MongoBlogRepository) LoadBlogs(ctx context.Context) ([]models.Blog, err
 	}
 
 	return blogs, nil
+}
+
+func (r *MongoBlogRepository) CreateBlog(ctx context.Context, blog models.Blog) (*mongo.InsertOneResult, error) {
+	collection := r.client.Database("go-dashboard").Collection("blogs")
+	result, err := collection.InsertOne(ctx, blog)
+	return result, err
 }

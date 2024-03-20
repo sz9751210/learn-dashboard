@@ -9,9 +9,17 @@ import (
 	"go-dashboard/utils/docker"
 	"os"
 	"path/filepath"
-
-	"go.mongodb.org/mongo-driver/mongo"
 )
+
+type BlogService struct {
+	repo *repository.MongoBlogRepository
+}
+
+func NewBlogService(repo *repository.MongoBlogRepository) *BlogService {
+	return &BlogService{
+		repo: repo,
+	}
+}
 
 func LoadBooks() ([]models.Book, error) {
 	if config.ShouldMock("getBooks") {
@@ -23,15 +31,16 @@ func LoadBooks() ([]models.Book, error) {
 	}
 }
 
-func LoadBlogs(client *mongo.Client) ([]models.Blog, error) {
+func (bs *BlogService) LoadBlogs(ctx context.Context) ([]models.Blog, error) {
 	if config.ShouldMock("getBlogs") {
 		var blogs []models.Blog
 		err := loadDataFromFile(filepath.Join("mockData", "blogs.json"), &blogs)
 		return blogs, err
 	} else {
-		ctx := context.TODO()
-		repo := repository.NewMongoBlogRepository(client)
-		return repo.LoadBlogs(ctx)
+		// ctx := context.TODO()
+		// repo := repository.NewMongoBlogRepository(client)
+		// return repo.LoadBlogs(ctx)
+		return bs.repo.LoadBlogs(ctx)
 	}
 }
 

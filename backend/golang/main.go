@@ -4,6 +4,8 @@ import (
 	"context"
 	"go-dashboard/config"
 	"go-dashboard/handlers"
+	"go-dashboard/repository"
+	"go-dashboard/services"
 	"log"
 
 	"github.com/gin-contrib/cors"
@@ -26,18 +28,22 @@ func main() {
 
 	config.InitMockData(client, databaseName, collectionName, mockDataFilePath)
 
+	blogRepo := repository.NewMongoBlogRepository(client)
+	blogService := services.NewBlogService(blogRepo)
+	blogHandler := handlers.NewBlogHandeler(blogService)
+
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://127.0.0.1:3100", "http://localhost:3100","http://localhost","http://127.0.0.1"},   // 允許這個源的跨域請求
-		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"}, // 允許的HTTP方法
+		AllowOrigins:     []string{"http://127.0.0.1:3100", "http://localhost:3100", "http://localhost", "http://127.0.0.1"}, // 允許這個源的跨域請求
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},                                       // 允許的HTTP方法
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true, // 允許前端請求攜帶認證信息（cookies）
 	}))
 
 	router.GET("/api/books", handlers.GetBooks)
-	router.GET("/api/blogs", handlers.GetBlogs(client))
+	router.GET("/api/blogs", blogHandler.GetBlogs)
 	router.GET("/api/containers", handlers.GetContainers)
 	router.GET("/api/images", handlers.GetImages)
 	// router.GET("/api/ssl", handlers.GetSSLCertificateInfo)

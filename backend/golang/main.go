@@ -22,11 +22,11 @@ func main() {
 		}
 	}()
 
-	databaseName := "go-dashboard"
-	collectionName := "blogs"
-	mockDataFilePath := "./mockData/blogs.json"
+	// databaseName := "go-dashboard"
+	// collectionName := "blogs"
+	// mockDataFilePath := "./mockData/blogs.json"
 
-	config.InitMockData(client, databaseName, collectionName, mockDataFilePath)
+	// config.InitMockData(client, databaseName, collectionName, mockDataFilePath)
 
 	blogRepo := repository.NewMongoBlogRepository(client)
 	blogService := services.NewBlogService(blogRepo)
@@ -44,9 +44,11 @@ func main() {
 
 	router.GET("/api/books", handlers.GetBooks)
 	router.GET("/api/blogs", blogHandler.GetBlogs)
-	router.POST("/api/blogs", blogHandler.CreateBlog)
+	router.GET("/api/blog/:title", blogHandler.GetBlogByTitle)
+	// router.POST("/api/blogs", blogHandler.CreateBlog)
 	// router.PUT("/api/blogs/:id", blogHandler.UpdateBlog)
-	router.PUT("/api/blogs/:blogID/repos/:repoID", blogHandler.UpdateRepo)
+	// router.PUT("/api/blogs/:id", blogHandler.UpdateBlogDetail)
+	// router.PUT("/api/blogs/:blogID/repos/:repoID", blogHandler.UpdateRepo)
 	router.GET("/api/containers", handlers.GetContainers)
 	router.GET("/api/images", handlers.GetImages)
 	// router.GET("/api/ssl", handlers.GetSSLCertificateInfo)

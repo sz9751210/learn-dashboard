@@ -10,7 +10,6 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -90,12 +89,12 @@ func InitMockData(client *mongo.Client, databaseName string, collectionName stri
 		log.Fatalf("Error unmarshalling mock data: %v", err)
 	}
 
-	for i := range blogs {
-		blogs[i].ID = primitive.NewObjectID()
-		for j := range blogs[i].RepoNames {
-			blogs[i].RepoNames[j].ID = primitive.NewObjectID()
-		}
-	}
+	// for i := range blogs {
+	// 	blogs[i].ID = primitive.NewObjectID()
+	// 	for j := range blogs[i].RepoNames {
+	// 		blogs[i].RepoNames[j].ID = primitive.NewObjectID()
+	// 	}
+	// }
 
 	// 獲取集合的句柄
 	collection := client.Database(databaseName).Collection(collectionName)

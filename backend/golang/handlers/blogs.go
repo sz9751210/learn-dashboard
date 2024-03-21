@@ -36,6 +36,19 @@ func (bh *BlogHandler) GetBlogByTitle(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, blog)
 }
+
+func (bh *BlogHandler) GetRepoByName(ctx *gin.Context) {
+	name := ctx.Query("blogName")
+
+	repo, err := bh.service.GetRepoByName(ctx, name)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, repo)
+}
+
 // func (bh *BlogHandler) CreateBlog(ctx *gin.Context) {
 // 	var newBlog models.Blog
 // 	if err := ctx.ShouldBindJSON(&newBlog); err != nil {

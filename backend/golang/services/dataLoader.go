@@ -46,7 +46,10 @@ func (bs *BlogService) LoadBlogs(ctx context.Context) ([]models.Blog, error) {
 
 func (bs *BlogService) GetBlogByTitle(ctx context.Context, title string) (*models.Blog, error) {
 	return bs.repo.FindBlogByTitle(ctx, title)
+}
 
+func (bs *BlogService) GetRepoByName(ctx context.Context, name string) (*models.Repo, error) {
+	return bs.repo.FindRepoByName(ctx, name)
 }
 
 // func (bs *BlogService) CreateBlog(ctx context.Context, blog models.Blog) (*models.Blog, error) {

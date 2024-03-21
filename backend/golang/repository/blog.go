@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 	"go-dashboard/models"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -57,6 +58,48 @@ func (r *MongoBlogRepository) FindBlogByTitle(ctx context.Context, title string)
 	}
 	return &blog, nil
 }
+
+// func (r *MongoBlogRepository) FindRepoByName(ctx context.Context, repoName string) (*models.Repo, error) {
+// 	collection := r.client.Database("go-dashboard").Collection("blogs")
+// 	var blog models.Blog
+// 	fmt.Println("ok")
+// 	filter := bson.M{"repoNames.blogName": repoName}
+// 	err := collection.FindOne(ctx, filter).Decode(&blog)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	fmt.Printf(blog.Title)
+// 	for _, repo := range blog.RepoNames {
+// 		if repo.BlogName == repoName {
+// 			fmt.Printf("Repo Details:\nName: %s\nTags: %v\nUrl: %s\n", repo.BlogName, repo.Tags, repo.Url)
+// 			return &repo, nil
+// 		}
+// 	}
+// 	return nil, errors.New("repo not found")
+
+// }
+
+func (r *MongoBlogRepository) FindRepoByName(ctx context.Context, repoName string) (*models.Repo, error) {
+    collection := r.client.Database("go-dashboard").Collection("blogs")
+    var blog models.Blog
+    filter := bson.M{"repoNames.blogName": repoName} // 修改查詢條件以匹配嵌套文檔
+    err := collection.FindOne(ctx, filter).Decode(&blog)
+    if err != nil {
+        return nil, err
+    }
+
+    // 從返回的Blog中找到匹配的Repo
+    for _, repo := range blog.RepoNames {
+        if repo.BlogName == repoName {
+            fmt.Printf("Repo Details:\nName: %s\nTags: %v\nUrl: %s\n", repo.BlogName, repo.Tags, repo.Url)
+            return &repo, nil
+        }
+    }
+
+    // 如果沒有找到匹配的Repo，返回錯誤
+    return nil, fmt.Errorf("repo not found")
+}
+
 
 // func (r *MongoBlogRepository) UpdateBlog(ctx context.Context, blog models.Blog) (*mongo.UpdateResult, error) {
 // 	collection := r.client.Database("go-dashboard").Collection("blogs")

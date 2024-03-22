@@ -7,7 +7,6 @@ import (
 	"go-dashboard/models"
 	"go-dashboard/repository"
 	"go-dashboard/utils/docker"
-	"go-dashboard/utils/ssl"
 	"os"
 	"path/filepath"
 )
@@ -113,9 +112,9 @@ func LoadSSL() ([]models.SSLInfo, error) {
 	}
 }
 
-func GetSSLCertificates(domain string) (*models.SSLInfo, error) {
-	return ssl.GetSSLInfo(domain)
-}
+// func GetSSLCertificates(domain string) (*models.SSLInfo, error) {
+// 	return ssl.GetSSLInfo(domain)
+// }
 
 func loadDataFromFile(filePath string, data interface{}) error {
 	fileBytes, err := os.ReadFile(filePath)

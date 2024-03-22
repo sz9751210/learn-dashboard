@@ -9,6 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type MongoSSLRepository struct {
@@ -49,4 +50,31 @@ func (r *MongoSSLRepository) GetSSL(domain string) (*models.SSLInfo, error) {
 		return nil, err
 	}
 	return &sslInfo, err
+}
+
+func (r *MongoSSLRepository) GetAllSSLInfos() ([]*models.SSLInfo, error) {
+	collection := r.client.Database("go-dashboard").Collection("ssl")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	var sslInfos []*models.SSLInfo
+	cursor, err := collection.Find(ctx, bson.M{}, options.Find())
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	for cursor.Next(ctx) {
+		var sslInfo models.SSLInfo
+		if err := cursor.Decode(&sslInfo); err != nil {
+			return nil, err
+		}
+		sslInfos = append(sslInfos, &sslInfo)
+	}
+
+	if err := cursor.Err(); err != nil {
+		return nil, err
+	}
+
+	return sslInfos, nil
 }

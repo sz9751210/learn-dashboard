@@ -25,17 +25,17 @@ func NewSSLHandler(service *services.SSLService) *SSLHandler {
 // 	c.JSON(http.StatusOK, ssls)
 // }
 
-func GetSSL(c *gin.Context) {
-	domain := c.Query("domain")
-	fmt.Println(domain)
-	ssl, err := services.GetSSLCertificates(domain)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
+// func GetSSL(c *gin.Context) {
+// 	domain := c.Query("domain")
+// 	fmt.Println(domain)
+// 	ssl, err := services.GetSSLCertificates(domain)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+// 		return
+// 	}
 
-	c.JSON(http.StatusOK, ssl)
-}
+// 	c.JSON(http.StatusOK, ssl)
+// }
 
 func (sh *SSLHandler) AddSSL(ctx *gin.Context) {
 	// domain := ctx.Query("domain")
@@ -46,5 +46,17 @@ func (sh *SSLHandler) AddSSL(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	ctx.JSON(http.StatusOK, ssl)
+}
+
+func (sh *SSLHandler) GetSSL(ctx *gin.Context) {
+	domain := ctx.Query("domain")
+	fmt.Println(domain)
+	ssl, err := sh.service.GetSSLCertificates(domain)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	ctx.JSON(http.StatusOK, ssl)
 }

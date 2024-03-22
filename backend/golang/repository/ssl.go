@@ -6,6 +6,7 @@ import (
 	"go-dashboard/models"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -36,3 +37,16 @@ func (r *MongoSSLRepository) AddSSL(info *models.SSLInfo) (*models.SSLInfo, erro
 	return info, nil
 }
 
+func (r *MongoSSLRepository) GetSSL(domain string) (*models.SSLInfo, error) {
+	collection := r.client.Database("go-dashboard").Collection("ssl")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	var sslInfo models.SSLInfo
+	filter := bson.M{"domain": domain}
+	err := collection.FindOne(ctx, filter).Decode(&sslInfo)
+	if err != nil {
+		return nil, err
+	}
+	return &sslInfo, err
+}

@@ -57,8 +57,8 @@ func main() {
 	router.GET("/api/containers", handlers.GetContainers)
 	router.GET("/api/images", handlers.GetImages)
 	// router.GET("/api/ssl", handlers.GetSSLCertificateInfo)
-	router.GET("/api/ssl", handlers.GetSSL)
 	router.POST("/api/ssl", sslHandler.AddSSL)
+	router.GET("/api/ssl", sslHandler.GetSSL)
 
 	if err := router.Run(":8081"); err != nil {
 		log.Fatalf("Failed to run server: %v", err)

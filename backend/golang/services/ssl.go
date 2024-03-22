@@ -25,3 +25,11 @@ func (s *SSLService) AddSSL(domain string) (*models.SSLInfo, error) {
 	}
 	return s.repo.AddSSL(sslInfo)
 }
+
+func (s *SSLService) GetSSLCertificates(domain string) (*models.SSLInfo, error) {
+	sslInfo, err := s.repo.GetSSL(domain)
+	if err != nil {
+		return nil, err
+	}
+	return sslInfo, nil
+}

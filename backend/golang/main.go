@@ -32,6 +32,10 @@ func main() {
 	blogService := services.NewBlogService(blogRepo)
 	blogHandler := handlers.NewBlogHandeler(blogService)
 
+	sslRepo := repository.NewMongoSSLRepository(client)
+	sslService := services.NewSSLService(sslRepo)
+	sslHandler := handlers.NewSSLHandler(sslService)
+
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
@@ -54,6 +58,7 @@ func main() {
 	router.GET("/api/images", handlers.GetImages)
 	// router.GET("/api/ssl", handlers.GetSSLCertificateInfo)
 	router.GET("/api/ssl", handlers.GetSSL)
+	router.POST("/api/ssl", sslHandler.AddSSL)
 
 	if err := router.Run(":8081"); err != nil {
 		log.Fatalf("Failed to run server: %v", err)

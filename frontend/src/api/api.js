@@ -58,10 +58,10 @@ const devopsApi = {
   },
   getSSLCertificate(params) {
     return request({
-      url: '/api/ssl',
+      url: '/api/ssls',
       method: 'get',
       data: params,
-      mock: true,
+      mock: false,
     })
   },
 }
